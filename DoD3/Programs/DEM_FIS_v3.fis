@@ -1,0 +1,44 @@
+[System]
+Name='DEM_FIS_v3'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=6
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Slope'
+Range=[0 1000]
+NumMFs=2
+MF1='Low':'trapmf',[0 0 7 15]
+MF2='High':'trapmf',[5 15 1000 1000]
+
+[Input2]
+Name='PointDensity'
+Range=[0 50]
+NumMFs=3
+MF1='Low':'trapmf',[0 0 0.2 0.5]
+MF2='Medium':'trapmf',[0.2 0.5 1 1.5]
+MF3='High':'trapmf',[1 1.5 50 50]
+
+[Output1]
+Name='ElevUncertainty'
+Range=[0 0.5]
+NumMFs=4
+MF1='low':'trapmf',[0 0 0.05 0.07]
+MF2='medium':'trapmf',[0.05 0.07 0.12 0.15]
+MF3='VeryHigh':'trapmf',[0.25 0.351 1 1]
+MF4='high':'trapmf',[0.12 0.15 0.25 0.35]
+
+[Rules]
+1 1, 4 (1) : 1
+1 2, 2 (1) : 1
+1 3, 1 (1) : 1
+2 1, 3 (1) : 1
+2 2, 4 (1) : 1
+2 3, 2 (1) : 1
